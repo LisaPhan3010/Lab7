@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EECS 348 Lab Seven Practice Four</title>
+</head>
+<body>
+    <h2>EECS 348 Lab Seven Practice Four</h2>
+    <form method="post">
+        <label for="table-size">Size of the multiplication table:</label>
+        <input type="number" id="table-size" name="table-size" required>
+        <button type="submit">Generate Table</button>
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $size = $_POST["table-size"];
+
+        if (!is_numeric($size) || $size <= 0) {
+            echo "<p>Please enter a positive number.</p>";
+        } else {
+            echo "<h3>Multiplication Table for $size</h3>";
+            echo "<table>";
+
+            // Table header with column indexes
+            echo "<tr><th></th>";
+            for ($col = 1; $col <= $size; $col++) {
+                echo "<th>$col</th>";
+            }
+            echo "</tr>";
+
+            // Table rows with row indexes and multiplication results
+            for ($row = 1; $row <= $size; $row++) {
+                echo "<tr>";
+                echo "<th>$row</th>";
+                for ($col = 1; $col <= $size; $col++) {
+                    echo "<td>" . ($row * $col) . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            echo "</table>";
+        }
+    }
+    ?>
+</body>
+</html>
